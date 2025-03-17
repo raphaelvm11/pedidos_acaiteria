@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido de Açaí</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <img src="logo2.png" class="logo">
+        <h2>Escolha seu Açaí</h2>
+        <label class="radio-container">
+            <input type="radio" name="tamanho" value="300ml"> 300ml (Até 6 Complementos)
+        </label>
+        <label class="radio-container">
+            <input type="radio" name="tamanho" value="500ml"> 500ml (Até 8 Complementos)
+        </label>
+
+        <div>
+            <h3>
+                Escolha seu Creme (Opcional)
+            </h3>
+            <label class="creme-option">
+                <input type="radio" name="creme" value="Creme de Ninho"> Creme de Ninho
+            </label>
+            <label class="creme-option">
+                <input type="radio" name="creme" value="Somente Açaí"> Somente Açaí
+            </label>
+        </div>
+        
+        <h3>Escolha seus complementos:</h3>
+        <div class="checkbox-group">
+            <label><input type="checkbox" value="Leite condensado"> Leite condensado</label>
+            <label><input type="checkbox" value="Cereja"> Cereja</label>
+            <label><input type="checkbox" value="Jujuba"> Jujuba</label>
+            <label><input type="checkbox" value="Morango"> Morango</label>
+            <label><input type="checkbox" value="Creme de Avelã"> Creme de Avelã</label>
+            <label><input type="checkbox" value="Confete"> Confete</label>
+            <label><input type="checkbox" value="Leite em Pó"> Leite em Pó</label>
+            <label><input type="checkbox" value="Amendoim"> Amendoim</label>
+            <label><input type="checkbox" value="Flocos de Arroz"> Flocos de Arroz</label>
+            <label><input type="checkbox" value="Kiwi"> Kiwi</label>
+            <label><input type="checkbox" value="Paçoca"> Paçoca</label>
+        </div>
+        
+        <h3>Nome:</h3>
+        <input type="text" id="nome" placeholder="Digite seu nome">
+        
+        <h3>Informe seu Bloco:</h3>
+        <textarea id="bloco" placeholder="Digite seu bloco"></textarea>
+        
+        <button onclick="fazerPedido()">Fazer Pedido</button>
+    </div>
+
+    <script>
+        function fazerPedido() {
+            let nome = document.getElementById("nome").value.trim();
+            if (!nome) {
+                alert("Digite seu nome!");
+                return;
+            }
+    
+            let tamanho = document.querySelector('input[name="tamanho"]:checked');
+            if (!tamanho) {
+                alert("Escolha um tamanho de açaí!");
+                return;
+            }
+            tamanho = tamanho.value;
+    
+            let creme = document.querySelector('input[name="creme"]:checked');
+            creme = creme ? creme.value : "Sem creme"; // Se nenhum creme for selecionado, exibe "Sem creme"
+    
+            let bloco = document.getElementById("bloco").value.trim();
+            if (!bloco) {
+                alert("Informe seu Bloco!");
+                return;
+            }
+    
+            let complementos = [];
+            document.querySelectorAll('input[type="checkbox"]:checked').forEach(el => complementos.push(el.value));
+    
+            let mensagem = `#Pedido ${nome}\n\n`;
+            mensagem += `•Bloco: ${bloco}\n`;
+            mensagem += `•Tamanho: ${tamanho}\n`;
+            mensagem += `•Creme: ${creme}\n\n`; // Agora o creme será incluído corretamente
+            mensagem += `*•Complementos:*\n`;
+            complementos.forEach(complemento => {
+                mensagem += `-${complemento}\n`;
+            });
+    
+            let numeroWhatsApp = "558694058922"; // Coloque seu número com DDD, sem espaços ou traços
+            let link = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+            window.location.href = link;
+        }
+    </script>    
+</body>
+</html>
