@@ -69,7 +69,7 @@
             tamanho = tamanho.value;
     
             let creme = document.querySelector('input[name="creme"]:checked');
-            creme = creme ? creme.value : "Sem creme"; // Se nenhum creme for selecionado, exibe "Sem creme"
+            creme = creme ? creme.value : "Sem creme";
     
             let bloco = document.getElementById("bloco").value.trim();
             if (!bloco) {
@@ -83,13 +83,13 @@
             let mensagem = `#Pedido ${nome}\n\n`;
             mensagem += `•Bloco: ${bloco}\n`;
             mensagem += `•Tamanho: ${tamanho}\n`;
-            mensagem += `•Creme: ${creme}\n\n`; // Agora o creme será incluído corretamente
+            mensagem += `•Creme: ${creme}\n\n`;
             mensagem += `*•Complementos:*\n`;
             complementos.forEach(complemento => {
                 mensagem += `-${complemento}\n`;
             });
     
-            let numeroWhatsApp = "558694058922"; // Coloque seu número com DDD, sem espaços ou traços
+            let numeroWhatsApp = "558694058922";
             let link = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
             window.location.href = link;
         }
